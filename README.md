@@ -6,7 +6,7 @@ Built on 2 machines: an Ubuntu machine hosting Splunk and a Windows machine with
 
 ## Lab Setup
 
-Ubuntu VM: Splunk Enterprise with 2 indexes: windows_sysmon (Sysmon telemetry, sourcetype XmlWinEventLog) and windows_basic_logs (native Windows logs).
+Ubuntu VM: Splunk Enterprise with 2 indexes: windows_sysmon (Sysmon telemetry, sourcetype XmlWinEventLog) and windows_basic_logs (native Windows logs: Application, Security, System).
 
 Windows VM: the monitored endpoint. Sysmon writes its events to the Microsoft-Windows-Sysmon/Operational channel. A Splunk Universal Forwarder reads the channels listed in inputs.conf and ships them to the indexer. Attack techniques are executed on this machine with Atomic Red Team.
 
@@ -54,7 +54,6 @@ is partial. One test is one implementation, not the technique.
 Missing from the lab itself:
 
 - Script Block Logging (Event 4104), without which PowerShell coverage cannot be complete
-- Security event log coverage, needed for T1053.005 and other techniques
 - a second endpoint, so nothing here has been tested against a realistic volume of noise
 
 The rules run in a lab with one endpoint. False positive rates in a production environment
