@@ -24,15 +24,6 @@ Each rule goes through the same steps.
 6. Document the logic, the false positives and the boundaries of the rule.
 7. Run `-Cleanup` so the next test starts from a clean state.
 
-Two principles came out of doing this repeatedly.
-
-Anchor on what cannot be changed cheaply. `Image` is a path on disk and changes when the
-binary is renamed, so `OriginalFileName` from the PE resources is used instead. Exact
-command line spelling breaks on a stray space or a quote. A network connection either
-happened or it did not.
-
-Every additional AND narrows a rule and creates another way around it. Conditions that add
-no confidence are left out on purpose, and the reasoning is recorded in each file.
 
 ## Detections
 
@@ -43,18 +34,10 @@ no confidence are left out on purpose, and the reasoning is recorded in each fil
 | T1105 | [Certutil Ingress Tool Transfer](detections/T1105-certutil-ingress-tool-transfer.md) | 1, 3, 22 | High |
 | T1547.001 | [Registry Run Key Persistence](detections/T1547.001-registry-run-key-persistence.md) | 1, 13 | Medium |
 
-Two of the four correlate several event types by `process_guid` rather than matching a
-single event.
-
 ## Coverage & Limitations
 
-Every rule here was written against a single atomic test, so the coverage of each technique
+Most of the rules here were written against a single atomic test, so the coverage of each technique
 is partial. One test is one implementation, not the technique.
-
-Missing from the lab itself:
-
-- Script Block Logging (Event 4104), without which PowerShell coverage cannot be complete
-- a second endpoint, so nothing here has been tested against a realistic volume of noise
 
 The rules run in a lab with one endpoint. False positive rates in a production environment
 would be different, and the tuning in these files does not account for that.
